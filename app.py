@@ -40,7 +40,6 @@ def upload_file():
     
     if file:
         
-        print("is file")
         
         file_uuid = str(uuid.uuid4())
         
@@ -48,17 +47,14 @@ def upload_file():
         current_file_dir = os.path.join(app.config['UPLOAD_FOLDER'], file_uuid)
         os.makedirs(current_file_dir, exist_ok=True)
         
-        print(f"curr file dir {current_file_dir}")
         
         if zipfile.is_zipfile(file):
         
-            print(f"is zip file {file.filename}")
             # extracts contents of the zip into filedir
             with zipfile.ZipFile(file, 'r') as zip_ref:
                 zip_ref.extractall(current_file_dir)
             
         elif file.filename.lower().endswith(('.txt')):
-            print(f"is mf txt {file.filename}")
             # saves txt into path
             file.save(os.path.join(current_file_dir, "_chat.txt"))
             
@@ -85,7 +81,6 @@ def parse_ws_archive():
     
     chat_messages = []
 
-    print(f"HALLO ???? {chat_txt}")
 
     with open(chat_txt, "r", encoding="utf-8") as file:
         
@@ -97,7 +92,6 @@ def parse_ws_archive():
                 chat_messages.append((timestamp, sender, message))
 
 
-    print(f"chatMsgs? {chat_messages}")
 
     html_content = ""
 
