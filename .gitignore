@@ -16,3 +16,6 @@ ehthumbs.db
 Thumbs.db
 
 temp/
+__pycache__
+uploads
+.venv

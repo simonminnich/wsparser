@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parsing Settings</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="error-container">
+
+        <h1>oops?</h1>
+        <h3 id="kao"></h3>
+
+        <p>
+            Something went wrong whilst {{error_msg}}
+        </p>
+
+    </div>
+
+    <script> 
+        function start_kaomoji_cylce() {
+    
+            const element = document.getElementById('kao');
+            if (!element) return;
+        
+            const strings = [
+                '(-_-)',
+                '(っ˘̩╭╮˘̩)っ	',
+                'o(TヘTo)	',
+                '｡ﾟ･ (>﹏<) ･ﾟ｡',
+                'ヾ(`ヘ´)ﾉﾞ	',
+                '(⇀‸↼‶)	',
+                '＼(〇_ｏ)／'
+            ];
+
+            const update_kaomoji = () => {
+                const randomIndex = Math.floor(Math.random() * strings.length);
+                element.textContent = strings[randomIndex];
+            }
+
+            update_kaomoji();
+
+            setInterval(() => {
+                update_kaomoji();
+            }, 5000); 
+        }
+        
+        start_kaomoji_cylce();
+    </script>
+</body>
+
+</html>
