@@ -1,0 +1,83 @@
+body {
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #BBD2C5;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #536976, #BBD2C5);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #536976, #BBD2C5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+h2 {
+    color: #1f272b;
+}
+
+.upload-container, .settings-container {
+    background-color: rgb(255 255 255 / 75%);
+    padding: 64px;
+    border-radius: 6px;
+    width: 25%;
+    min-width: 280px;
+    box-shadow: 0px 0px 32px rgb(0, 0, 0, 0.2);
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.input {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+input[type="file"] {
+    font-family: monospace;
+}
+
+input[type="text"] {
+    background-color: white;
+    border: none;
+    padding: 8px;
+    font-family: monospace;
+    border-radius: 4px;
+}
+
+
+
+
+.chat_preview {
+    max-height: 200px;
+    overflow-y: scroll;
+    background-color: #fff;
+    padding: 12px;
+    white-space: break-spaces;
+    font-family: monospace;
+    line-height: 1;
+    border-radius: 4px;
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;
+    position: relative;
+}
+
+.chat_preview::-webkit-scrollbar {
+    display: none;
+}
+
+
+button {
+    background-color: #1f272b;
+    color: #deebf2;
+    padding: 12px;
+    border: none;
+    border-radius: 8px;
+    box-shadow: 0px 0px 6px rgb(0, 0, 0, 0.5);
+    text-transform: uppercase;
+    font-weight: bold;
+    cursor: pointer;
+}

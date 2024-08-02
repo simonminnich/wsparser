@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Parsing Settings</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <div class="settings-container">
+
+        <div class="chat_preview">
+            {{ preview }}
+        </div>
+
+        <div class="settings">
+            <h2>Set Parsing settings</h2>
+            <form action="{{ url_for('parse_file') }}" method="post" enctype="multipart/form-data">
+                <div class="input">
+                    <label for="me">How the Chat is Referring to Yourself</label>
+                    <input type="text" placeholder="`simon` or `pia` etc." id="me">
+                </div>
+                <div class="input">
+                    <label for="attachment">How Attachments are Defined</label>
+                    <input type="text" placeholder="`Attachment` or `Anhang` etc." id="attachment">
+                </div>
+                <button type="submit">Upload</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+
+</html>
