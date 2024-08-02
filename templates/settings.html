@@ -20,11 +20,11 @@
             <form action="{{ url_for('parse_file') }}" method="post" enctype="multipart/form-data">
                 <div class="input">
                     <label for="me">How the Chat is Referring to Yourself</label>
-                    <input type="text" placeholder="`simon` or `pia` etc." id="me">
+                    <input type="text" placeholder="`simon` or `pia` etc." name="me" id="me">
                 </div>
                 <div class="input">
                     <label for="attachment">How Attachments are Defined</label>
-                    <input type="text" placeholder="`Attachment` or `Anhang` etc." id="attachment">
+                    <input type="text" placeholder="`Attachment` or `Anhang` etc." name="attachment" id="attachment">
                 </div>
                 <button type="submit">Upload</button>
             </form>

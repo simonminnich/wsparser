@@ -11,11 +11,17 @@ body {
     background: linear-gradient(to right, #536976, #BBD2C5); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
+
+h1 {
+    color: #2a373d;
+    margin-top: 8px;
+}
+
 h2 {
     color: #1f272b;
 }
 
-.upload-container, .settings-container {
+.upload-container, .settings-container, .error-container, .download-container {
     background-color: rgb(255 255 255 / 75%);
     padding: 64px;
     border-radius: 6px;
@@ -48,7 +54,13 @@ input[type="text"] {
     border-radius: 4px;
 }
 
+pre {
+    white-space: normal;
+}
 
+.icon-container {
+    text-align: center;
+}
 
 
 .chat_preview {
@@ -68,7 +80,6 @@ input[type="text"] {
 .chat_preview::-webkit-scrollbar {
     display: none;
 }
-
 
 button {
     background-color: #1f272b;

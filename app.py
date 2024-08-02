@@ -5,11 +5,12 @@ import zipfile
 from whatsapp_chat_viewer import parse_chat, get_chat_preview
 
 app = Flask(__name__)
-app.config['MAX_CONTENT_LENGTH'] = 1024 * 1024 * 1024 #1gb?
+app.config['MAX_CONTENT_LENGTH'] = 2 * 1024 * 1024 * 1024 #2gb?
 app.config['UPLOAD_FOLDER'] = 'temp'
 
 #keep current html as var
 current_file_dir = "" 
+error_message = "" 
 
 def load_default_html(html):
     with open('temp.html', 'r') as file:
@@ -23,13 +24,14 @@ def upload_form():
 
 @app.route('/error')
 def show_error():
-    return render_template('error.html')
+    global error_message
+    return render_template('error.html', error_msg=error_message)
 
 
 @app.route('/upload', methods=['POST'])
 def upload_file():
     
-    global current_file_dir
+    global current_file_dir, error_message
     
     if 'file' not in request.files:
         return redirect(request.url)
@@ -56,6 +58,7 @@ def upload_file():
             file.save(os.path.join(current_file_dir, "_chat.txt"))
             
         else:
+            error_message = "uploading the file"
             return redirect(url_for('show_error'))
     
     return redirect(url_for('show_parsing_settings'))
@@ -74,18 +77,19 @@ def show_parsing_settings():
 @app.route('/parsing', methods=['POST'])
 def parse_file():     
     
-    me = request.form.get('me', '')
-    attachment = request.form.get('attachment', 'Attachment')
+    global error_message, current_file_dir
     
-    print(f"me: {me}")
-    print(f"attachment: {attachment}")
+    me = request.values.get('me', '')
+    attachment = request.values.get('attachment', 'Attachment')
     
-    global current_file_dir
+    print(f"from route me: {me}")
+    print(f"from route attachment_term: {attachment}")
     
     # parsing happens here; after settings have been set
     # loading bar for parsing happens in js / html
     
     if not parse_chat(current_file_dir, me, attachment):
+        error_message = "parsing the message"
         return redirect(url_for('show_error'))
     else:
         return redirect(url_for('download_parsed'))
@@ -93,7 +97,19 @@ def parse_file():
         
 @app.route('/download')
 def download_parsed():
-    return render_template('download.html', current_dir=current_file_dir)
+    
+    current_working_directory = os.getcwd()
+    
+    path = os.path.join(current_working_directory, current_file_dir)
+    
+    return render_template('download.html', current_dir=path)
+
+
+
+        
+@app.route('/view')
+def view_chat():
+    return render_template(f'{current_file_dir}/index.html')
         
 if __name__ == '__main__':
     app.run(debug=True)

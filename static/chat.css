@@ -1,0 +1,28 @@
+:root {
+    --own-message-color: #fff;
+    --others-message-color: #fff;
+    --chat-background: #fff;
+}
+
+body {
+    width: 100%;
+}
+
+.message.own {
+    align-items: flex-end;
+    left: 50%;
+    background-color: #d3dbd3;
+}
+
+.message {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 4px;
+    max-width: 45%;
+    position: relative;
+    padding: 6px;
+    border-radius: 6px;
+    background-color: #dbdbdb;
+    margin: 12px 0px;
+}

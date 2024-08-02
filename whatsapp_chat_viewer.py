@@ -1,6 +1,7 @@
 import os, re
 
 def parse_chat(current_file_dir, me="", attachment_term="Attachment"):
+    
     if os.path.isdir(current_file_dir):
         if os.path.isfile(os.path.join(current_file_dir, "_chat.txt")):
             chat_txt = os.path.join(current_file_dir, "_chat.txt")
@@ -12,6 +13,8 @@ def parse_chat(current_file_dir, me="", attachment_term="Attachment"):
     
     chat_messages = []
 
+    print(f"me: {me}")
+    print(f"attachment_term: {attachment_term}")
 
     with open(chat_txt, "r", encoding="utf-8") as file:
         
@@ -25,25 +28,32 @@ def parse_chat(current_file_dir, me="", attachment_term="Attachment"):
 
 
     html_content = ""
+    temp = 0
 
     for timestamp, sender, message in chat_messages:
         
+        if temp < 10:
+            print(f"sender: {sender}")
+        
+        temp += 1
+        
+        html_content += "<div class=\"message_container\">"
+        
         if(sender == me):
-            html_content += f"<div class=\"message_container\"><div class=\"message own\"><div>{sender}:</div><div>{message}"
+            html_content += f"<div class=\"message own\"><div>{sender}:</div><div>{message}"
         else:
             html_content += f"<div class=\"message\"><div>{sender}:</div><div>{message}"
 
         attachments = re.findall(fr"<{attachment_term}: (.*?)>", message)
         for attachment in attachments:
-            attachment_path = current_file_dir + attachment
-            
+            attachment_path = os.path.join(current_file_dir, attachment)
             html_content += f'<br><a target="_blank" href="{attachment_path}"><img src="{attachment_path}" alt="Attachment">'
 
         html_content += f"</div><div>{timestamp}</div></div></div>"
-        
-        
-    with open(os.path.join(current_file_dir, "index.html"), "w") as file:
-        file.write(html_content)
+    
+    # replace with ٩(｡•́‿•̀｡)۶
+    build_html(html_content, current_file_dir)
+    return True
         
         
         
@@ -63,11 +73,33 @@ def get_chat_preview(current_file_dir):
     with open(chat_txt, 'r', encoding='utf-8') as f:
         return f.read(3000)
     
-
-def build_html(html_content):
-    print("grrr")
     
-    # styling = with open(chat_txt, "r", encoding="utf-8") as file:
-        
-    # with open(os.path.join(current_file_dir, "index.html"), "w") as file:
-        # file.write(html_content)
+
+def build_html(html_content, current_file_dir):
+    
+    html_start = """
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Chat</title>
+        <style>
+    """
+    
+    with open('static/chat.css', 'r') as css_file:
+        css_content = css_file.read()
+    
+    html_end = """
+        </style>
+    </head>
+    <body class="chat">
+    """
+
+    html_close = """
+    </body>
+    </html>
+    """
+    
+    with open(os.path.join(current_file_dir, "index.html"), "w") as file:
+        file.write(f"{html_start}\n{css_content}\n{html_end}\n{html_content}\n{html_close}")
