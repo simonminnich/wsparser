@@ -1,5 +1,8 @@
 # WhatsApp Exported Chat Viewer
 
+![Python WhatsApp Chat parser](https://github.com/simonminnich/wsparser/blob/main/icon.png?raw=true)
+
+
 ## Overview
 
 Welcome to the WhatsApp Exported Chat Viewer/Parser! This Python tool helps you parse to View exported Chats from WhatsApp. 
